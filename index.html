@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+  <title>合併測試</title>
 </head>
 
 <body>
@@ -10,7 +10,7 @@
   <br>
   <input name="inputImg" type="file" id="imgInp" accept="image/gif, image/jpeg, image/png" onchange="readURL(this)">
   <br>
-  <button>下載</button>
+  <button onclick="download()">下載</button>
   <script>
     var canvas = document.getElementById('myCanvas');
     var context = canvas.getContext('2d');
@@ -50,6 +50,12 @@
       }
     }
 
+    var download = function () {
+      var link = document.createElement('a');
+      link.download = '照片.png';
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
   </script>
 </body>
 
