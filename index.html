@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <canvas id="myCanvas"></canvas>
+  <br>
+  <input name="inputImg" type="file" id="imgInp" accept="image/gif, image/jpeg, image/png" onchange="readURL(this)">
+  <br>
+  <button>下載</button>
+  <script>
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+
+    var imageObj1 = new Image();
+    imageObj1.src = "./radish.png";
+    imageObj1.onload = function () {
+      canvas.width = imageObj1.width;
+      canvas.height = imageObj1.height;
+      var imageObj2 = new Image();
+      imageObj2.src = "./twtw.png";
+      imageObj2.onload = function () {
+        context.drawImage(imageObj1, 0, 0);
+        context.drawImage(imageObj2, 0, 0);
+      };
+    };
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          var image = new Image();
+          image.src = e.target.result;
+          image.onload = function () {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            var imageObj2 = new Image();
+            imageObj2.src = "./twtw.png";
+            imageObj2.onload = function () {
+              context.drawImage(image, 0, 0);
+              context.drawImage(imageObj2, 0, 0);
+            };
+          };
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
